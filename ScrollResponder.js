@@ -34,13 +34,11 @@
    */
   ScrollResponder.prototype.init = function() {
 
-    // Assign events
-    window.addEventListener('load', this.calculate.bind(this), false);
-    window.addEventListener('resize', this.calculate.bind(this), false);
-    window.addEventListener('scroll', function() {
+    // Event helpers
+    function applyScroll() {
       this.latestKnownScrollY = window.pageYOffset;
       requestTick.call(this);
-    }.bind(this));
+    }
 
     function requestTick() {
       if(!this.ticking) {
@@ -48,6 +46,16 @@
       }
       this.ticking = true;
     }
+
+    // Assign events
+    // Precalculate on load/resize
+    window.addEventListener('load', this.calculate.bind(this), false);
+    window.addEventListener('resize', this.calculate.bind(this), false);
+    // Update on load/scroll
+    window.addEventListener('load', applyScroll.bind(this));
+    window.addEventListener('scroll', applyScroll.bind(this));
+
+
   }
 
   /**
