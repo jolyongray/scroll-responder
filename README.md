@@ -22,7 +22,11 @@ var scrollAnimation = new ScrollResponder(elements,
 ## Options
 `preCalculate: function(element)`
 Use to precompute and store any values on each element that you will need in your animation function.
+
+
 `upperbound: number=window.innerHeight`
 Starts animation at this number of px down the viewport. Default: viewport height (animation starts as element becomes visible at bottom of screen).
+
+
 `hideAtScrollTop: boolean=false`
 Makes animation start lower if object will be visible at scroll 0. Overrides options.upperbound if effective.
